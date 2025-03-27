@@ -4,6 +4,7 @@ export type RootStackParamList = {
   Home: undefined;
   CelsiusToFahrenheit: undefined;
   KmToMp: undefined;
+  Invite: undefined;
   AgeCalculator: undefined
 };
 

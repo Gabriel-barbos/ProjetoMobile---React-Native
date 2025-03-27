@@ -11,6 +11,7 @@ import KmToMp from './screens/KmToMp';
 import CelsiusToFahrenheit from './screens/CelsiusToFahrenheit';
 import Home from './screens/Home';
 import AgeCalculator from './screens/AgeCalculator';
+import Invite from './screens/Invite';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -42,9 +43,17 @@ export default function App() {
         options={{ title: 'Idade' }}
       />
 
+<Stack.Screen 
+        name="Invite" 
+        component={ Invite} 
+        options={{ title: 'Invite' }}
+      />
+
+
 
     </Stack.Navigator>
   </NavigationContainer>
   );
 }
+
 

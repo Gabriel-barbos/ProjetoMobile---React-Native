@@ -8,6 +8,7 @@ type RootStackParamList = {
   KmToMp: undefined;
   Home: undefined;
   AgeCalculator: undefined;
+  Invite: undefined
 };
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
@@ -15,7 +16,7 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 export default function Home({ navigation }: Props) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Calculadoras de Conversão</Text>
+      <Text style={styles.title}>Mini Projetos</Text>
 
       <View style={styles.rowContainer}>
         <TouchableOpacity
@@ -53,6 +54,19 @@ export default function Home({ navigation }: Props) {
           />
           <Text style={styles.cardText}>Calculadora de idade </Text>
         </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.card}
+          onPress={() => navigation.navigate('Invite')}
+        >
+          <Image
+            source={require('../assets/invite.webp')}
+            style={styles.imagem}
+            resizeMode="contain"
+          />
+          <Text style={styles.cardText}>Convites</Text>
+        </TouchableOpacity>
+
       </View>
     </View>
   );
