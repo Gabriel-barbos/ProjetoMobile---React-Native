@@ -5,21 +5,24 @@ import {
   StyleSheet, 
   Image, 
   TouchableOpacity, 
-  ScrollView 
+  ScrollView, 
+  TextInput, 
+  Alert 
 } from 'react-native';
 import { FontAwesome5, MaterialIcons, Ionicons } from '@expo/vector-icons';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import Icon from 'react-native-vector-icons/MaterialIcons'; 
 
 
 type RootStackParamList = {
-    CelsiusToFahrenheit: undefined;
-    KmToMp: undefined;
-    Home: undefined;
-    Invite: undefined
-  };
+  CelsiusToFahrenheit: undefined;
+  KmToMp: undefined;
+  Home: undefined;
+  Invite: undefined;
+};
 
 type Props = NativeStackScreenProps <RootStackParamList, 'Invite'>;
-
 
 export default function Invite ({ navigation }: Props)  {
   const [timeRemaining, setTimeRemaining] = useState('');
@@ -28,9 +31,10 @@ export default function Invite ({ navigation }: Props)  {
     adults: 0,
     elderly: 0
   });
+  const [age, setAge] = useState('');  // Estado para armazenar a idade digitada
+  const [isAgeInputVisible, setIsAgeInputVisible] = useState(false);  // Controla a visibilidade do input de idade
 
-  // Data do próximo jogo (ajuste conforme necessário)
-  const gameDate = new Date('2024-04-15T19:00:00');
+  const gameDate = new Date('2025-04-15T19:00:00');
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -48,48 +52,85 @@ export default function Invite ({ navigation }: Props)  {
   }, []);
 
   const handleConfirmPresence = () => {
-    // Lógica para confirmar presença
-    setConfirmations(prev => ({
-      ...prev,
-      adults: prev.adults + 1
-    }));
+    setIsAgeInputVisible(true);  // Exibe o input de idade
+  };
+
+  const handleSubmitAge = () => {
+    const parsedAge = parseInt(age, 10);
+    if (isNaN(parsedAge) || parsedAge <= 0) {
+      Alert.alert('Idade inválida', 'Por favor, insira uma idade válida.');
+      return;
+    }
+
+    // Atualiza os contadores com base na idade
+    if (parsedAge <= 12) {
+      setConfirmations(prev => ({
+        ...prev,
+        children: prev.children + 1
+      }));
+    } else if (parsedAge >= 60) {
+      setConfirmations(prev => ({
+        ...prev,
+        elderly: prev.elderly + 1
+      }));
+    } else {
+      setConfirmations(prev => ({
+        ...prev,
+        adults: prev.adults + 1
+      }));
+    }
+
+    setAge('');  // Limpa o campo de idade
+    setIsAgeInputVisible(false);  // Esconde o campo de idade
   };
 
   return (
     <ScrollView style={styles.container}>
-      {/* Imagem do Evento */}
       <Image 
-        source={{ uri: 'https://example.com/corinthians-game-banner.jpg' }} 
+        source={ require('../assets/sccp.png') } 
         style={styles.eventImage}
         resizeMode="cover"
       />
 
-      {/* Título e Detalhes */}
       <View style={styles.headerContainer}>
         <Text style={styles.title}>Corinthians x Palmeiras</Text>
-        <Text style={styles.subtitle}>Derby Paulista - Campeonato Paulista</Text>
+        <Text style={styles.subtitle}>A exterminação do mal verde</Text>
       </View>
 
-      {/* Contagem Regressiva */}
       <View style={styles.countdownContainer}>
         <Ionicons name="time-outline" size={24} color="#333" />
-        <Text style={styles.countdownText}>Próximo jogo em: {timeRemaining}</Text>
+        <Text style={styles.countdownText}>O Jogo irá começar em: {timeRemaining}</Text>
       </View>
 
-      {/* Botões de Ação */}
       <View style={styles.actionButtonsContainer}>
         <TouchableOpacity 
           style={styles.confirmButton}
           onPress={handleConfirmPresence}
         >
-          <Text style={styles.confirmButtonText}>Confirmar Presença</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.detailsButton}>
-          <Text style={styles.detailsButtonText}>Ver Detalhes</Text>
+<MaterialCommunityIcons name="calendar-plus" size={24} color="black" />          <Text style={styles.confirmButtonText}>Confirmar Presença</Text>
+          
         </TouchableOpacity>
       </View>
 
-      {/* Cards de Confirmação */}
+     
+      {isAgeInputVisible && (
+        <View style={styles.ageInputContainer}>
+          <TextInput
+            style={styles.ageInput}
+            placeholder="Digite sua idade"
+            keyboardType="numeric"
+            value={age}
+            onChangeText={setAge}
+          />
+          <TouchableOpacity
+            style={styles.submitButton}
+            onPress={handleSubmitAge}
+          >
+            <Text style={styles.submitButtonText}>Confirmar Idade</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+
       <View style={styles.confirmationCardsContainer}>
         <View style={styles.confirmationCard}>
           <FontAwesome5 name="child" size={24} color="#3498db" />
@@ -153,25 +194,45 @@ const styles = StyleSheet.create({
     padding: 20
   },
   confirmButton: {
-    backgroundColor: '#2ecc71',
+    flexDirection: 'row',
     padding: 15,
-    borderRadius: 10,
-    width: '45%',
-    alignItems: 'center'
+    borderRadius: 40,
+    borderWidth: 2,
+    borderColor: '#000',
+    width: 250,
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 12
   },
   confirmButtonText: {
-    color: 'white',
+    color: '#000',
+    fontSize: 16,
     fontWeight: 'bold'
   },
-  detailsButton: {
-    backgroundColor: '#3498db',
-    padding: 15,
-    borderRadius: 10,
-    width: '45%',
+  ageInputContainer: {
+    padding: 20,
     alignItems: 'center'
   },
-  detailsButtonText: {
-    color: 'white',
+  ageInput: {
+    width: '80%',
+    height: 40,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingLeft: 10,
+    fontSize: 16,
+    marginBottom: 10
+  },
+  submitButton: {
+    backgroundColor: '#000',
+    padding: 15,
+    borderRadius: 12,
+    width: 170,
+    alignItems: 'center'
+  },
+  submitButtonText: {
+    color: '#fff',
+    fontSize: 14,
     fontWeight: 'bold'
   },
   confirmationCardsContainer: {
@@ -198,4 +259,3 @@ const styles = StyleSheet.create({
     color: '#333'
   }
 });
-
