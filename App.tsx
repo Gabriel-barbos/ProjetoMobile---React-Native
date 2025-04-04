@@ -12,6 +12,7 @@ import CelsiusToFahrenheit from './screens/CelsiusToFahrenheit';
 import Home from './screens/Home';
 import AgeCalculator from './screens/AgeCalculator';
 import Invite from './screens/Invite';
+import Lottery from './screens/Lottery'
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -47,6 +48,12 @@ export default function App() {
         name="Invite" 
         component={ Invite} 
         options={{ title: 'Invite' }}
+      />
+
+      <Stack.Screen 
+        name="Lottery" 
+        component={ Lottery} 
+        options={{ title: 'Lottery' }}
       />
 
 

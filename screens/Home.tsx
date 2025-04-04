@@ -8,7 +8,8 @@ type RootStackParamList = {
   KmToMp: undefined;
   Home: undefined;
   AgeCalculator: undefined;
-  Invite: undefined
+  Invite: undefined;
+  Lottery: undefined
 };
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
@@ -66,6 +67,19 @@ export default function Home({ navigation }: Props) {
           />
           <Text style={styles.cardText}>Convites</Text>
         </TouchableOpacity>
+
+           <TouchableOpacity
+          style={styles.card}
+          onPress={() => navigation.navigate('Lottery')}
+        >
+          <Image
+            source={require('../assets/money-icon.png')}
+            style={styles.imagem}
+            resizeMode="contain"
+          />
+          <Text style={styles.cardText}>Megasena</Text>
+        </TouchableOpacity>
+        
 
       </View>
     </View>
