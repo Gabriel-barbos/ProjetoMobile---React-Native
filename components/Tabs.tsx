@@ -31,7 +31,7 @@ export default function Tabs() {
         component={Home2}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Icon name="nightlight" color={color} size={size} />
+            <Icon name="work-outline" color={color} size={size} />
           ),
           tabBarLabel: 'Projetos 2',
         }}
