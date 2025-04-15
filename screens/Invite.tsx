@@ -20,6 +20,7 @@ type RootStackParamList = {
   KmToMp: undefined;
   Home: undefined;
   Invite: undefined;
+  Tabs: undefined
 };
 
 type Props = NativeStackScreenProps <RootStackParamList, 'Invite'>;

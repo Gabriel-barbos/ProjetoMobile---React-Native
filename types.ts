@@ -6,7 +6,10 @@ export type RootStackParamList = {
   KmToMp: undefined;
   Invite: undefined;
   AgeCalculator: undefined;
-  Lottery: undefined
+  Lottery: undefined;
+  Tabs: undefined;
+  TextScreen: undefined;
+
 };
 
 export type Props = NativeStackScreenProps<RootStackParamList, 'CelsiusToFahrenheit'>;

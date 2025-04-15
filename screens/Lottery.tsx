@@ -13,12 +13,13 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-import { gerarSorteio, verificarAcertos } from './components/lottery';
+import { gerarSorteio, verificarAcertos } from '../components/Lottery';
 
 type RootStackParamList = {
     CelsiusToFahrenheit: undefined;
     KmToMp: undefined;
     Home: undefined;
+    Tabs: undefined;
     Lottery: undefined
   };
 
@@ -88,7 +89,7 @@ export default function Lottery({ navigation }: Props) {
 
           <TouchableOpacity
                                     style={styles.switchButton}
-                                    onPress={() => navigation.navigate('Home')}
+                                    onPress={() => navigation.navigate('Tabs')}
                                 >
                                     <Icon name="arrow-back" size={24} color="#000" />
                                     <Text style={styles.switchButtonText}>Voltar para Home</Text>

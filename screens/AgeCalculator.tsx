@@ -17,6 +17,7 @@ type RootStackParamList = {
     KmToMp: undefined;
     AgeCalculator: undefined;
     Home: undefined;
+    Tabs: undefined
 };
 
 type Props = NativeStackScreenProps<RootStackParamList, 'AgeCalculator'>;
@@ -72,7 +73,7 @@ export default function AgeCalculator({ navigation }: Props) {
 
                 <TouchableOpacity
                     style={styles.switchButton}
-                    onPress={() => navigation.navigate('Home')}
+                    onPress={() => navigation.navigate('Tabs')}
                 >
                     <Icon name="arrow-back" size={24} color="#000" />
                     <Text style={styles.switchButtonText}>Voltar para Home</Text>
