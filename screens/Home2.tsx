@@ -12,6 +12,7 @@ type RootStackParamList = {
   Invite: undefined;
   Lottery: undefined;
   Text: undefined;
+  FoodMenu: undefined;
 };
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
@@ -24,7 +25,7 @@ export default function Home2({ navigation }: Props) {
       <View style={styles.rowContainer}>
         <TouchableOpacity
           style={styles.card}
-          onPress={() => navigation.navigate('CelsiusToFahrenheit')}
+          onPress={() => navigation.navigate('FoodMenu')}
         >
           <Image
             source={require('../assets/food-icon.png')} // ícone de Cardápio

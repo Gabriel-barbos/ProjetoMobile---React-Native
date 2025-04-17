@@ -14,6 +14,9 @@ import TextScreen from './screens/TextScreen';
 
 import Tabs from './components/Tabs'; 
 
+import FoodMenu from './screens/FoodMenu'
+import Foods from './screens/Foods'
+
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
@@ -55,6 +58,16 @@ export default function App() {
           name="TextScreen" 
           component={TextScreen} 
           options={{ title: 'Text' }}
+        />
+         <Stack.Screen 
+          name="FoodMenu" 
+          component={FoodMenu} 
+          options={{ title: 'FoodMenu' }}
+        />
+          <Stack.Screen 
+          name="Foods" 
+          component={Foods} 
+          options={{ title: 'Foods' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

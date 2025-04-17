@@ -6,29 +6,50 @@ const categorias = [
   {
     id: 1,
     nome: 'Bebidas',
-    imagem: 'https://images.unsplash.com/photo-1589187155475-54dbb5a3166c', // coloque URLs reais ou locais
+    descricao: 'Refrescos, sucos naturais e refrigerantes geladinhos.',
+    imagem: require('../assets/drink.png'),
   },
   {
     id: 2,
     nome: 'Lanches',
-    imagem: 'https://images.unsplash.com/photo-1550547660-d9450f859349',
+    descricao: 'Hambúrgueres, sanduíches artesanais e porções.',
+    imagem: require('../assets/lanches.webp'),
   },
   {
     id: 3,
     nome: 'Sobremesas',
-    imagem: 'https://images.unsplash.com/photo-1542444459-db3cc0bfd2ac',
+    descricao: 'Doces, bolos e sobremesas para adoçar seu dia.',
+    imagem: require('../assets/doce-icon.jpeg'),
   },
 ];
 
-const CardapioScreen = () => {
+const CardapioScreen = ({ navigation }) => {
   return (
     <ScrollView style={styles.container}>
+      {/* Imagem do restaurante */}
+      <View style={styles.containerImagem}>
+        <Image
+          source={require('../assets/capa.png')}
+          style={styles.imagemRestaurante}
+          resizeMode="cover"
+        />
+      </View>
+
+      <Text style={styles.tituloPrincipal}>Conheça nosso cardápio</Text>
+
+      {/* Lista de categorias */}
       {categorias.map((item) => (
         <View key={item.id} style={styles.card}>
-          <Image source={{ uri: item.imagem }} style={styles.imagem} />
+          <Image source={item.imagem} style={styles.imagemCategoria} />
           <View style={styles.conteudo}>
-            <Text style={styles.titulo}>{item.nome}</Text>
-            <TouchableOpacity style={styles.botao}>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.tituloCategoria}>{item.nome}</Text>
+              <Text style={styles.descricaoCategoria}>{item.descricao}</Text>
+            </View>
+            <TouchableOpacity
+              style={styles.botao}
+              onPress={() => navigation.navigate('Categoria', { categoriaNome: item.nome })}
+            >
               <Text style={styles.textoBotao}>Ver mais</Text>
             </TouchableOpacity>
           </View>
@@ -40,33 +61,54 @@ const CardapioScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
     backgroundColor: '#fff',
+    padding: 16,
+  },
+  containerImagem: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  imagemRestaurante: {
+    width: 200,
+    height: 200,
+    borderRadius: 20,
+    backgroundColor: '#d9d9d9',
+  },
+  tituloPrincipal: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
   },
   card: {
     flexDirection: 'row',
-    marginBottom: 20,
     backgroundColor: '#f0f0f0',
     borderRadius: 8,
-    overflow: 'hidden',
-    elevation: 2, // sombra para Android
-    shadowColor: '#000', // sombra para iOS
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    marginBottom: 20,
+    padding: 10,
+    elevation: 2,
   },
-  imagem: {
+  imagemCategoria: {
     width: 100,
     height: 100,
+    borderRadius: 8,
   },
   conteudo: {
     flex: 1,
-    padding: 12,
+    marginLeft: 12,
+    flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
-  titulo: {
+  tituloCategoria: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 8,
+    marginBottom: 4,
+  },
+  descricaoCategoria: {
+    fontSize: 14,
+    color: '#555',
+    marginRight: 8,
   },
   botao: {
     backgroundColor: '#007bff',

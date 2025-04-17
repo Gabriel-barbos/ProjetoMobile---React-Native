@@ -9,7 +9,8 @@ export type RootStackParamList = {
   Lottery: undefined;
   Tabs: undefined;
   TextScreen: undefined;
-
+  FoodMenu: undefined;
+  Foods: undefined
 };
 
 export type Props = NativeStackScreenProps<RootStackParamList, 'CelsiusToFahrenheit'>;
